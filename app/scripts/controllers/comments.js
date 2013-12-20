@@ -18,7 +18,8 @@ angular.module('tmrApp').controller('CommentsCtrl', function ($scope, $routePara
     var apiOp = data[0].data.children[0].data;
     return {
       title: apiOp.title,
-      subreddit: apiOp.subreddit
+      subreddit: apiOp.subreddit,
+      domain: apiOp.domain
     };
   }
 

@@ -61,5 +61,9 @@ describe('Controller: CommentsCtrl', function () {
     it('contains a subreddit', function () {
       expect(scope.op.subreddit).toEqual('programming');
     });
+
+    it('contains the op domain', function () {
+      expect(scope.op.domain).toEqual('example.com');
+    });
   });
 });
