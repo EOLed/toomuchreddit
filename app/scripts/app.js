@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('toomuchredditApp', [
+angular.module('tmrApp', [
   'ngCookies',
   'ngResource',
   'ngSanitize',
