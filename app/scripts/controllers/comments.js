@@ -11,11 +11,20 @@ angular.module('tmrApp').controller('CommentsCtrl', function ($scope, $routePara
   }
 
   function sendToServer(data) {
-    return $http.post('http://toomuchreddit.com/comments', data);
+    return $http.post('/comments', data);
+  }
+
+  function getOriginalPostFromResponse(data) {
+    var apiOp = data[0].data.children[0].data;
+    return {
+      title: apiOp.title,
+      subreddit: apiOp.subreddit
+    };
   }
 
   $http.jsonp(getCommentsJsonPermalink())
     .success(function (data) {
+      $scope.op = getOriginalPostFromResponse(data);
       sendToServer(data);
     }).error(function () {
       console.log('could not send comments to toomuchreddit.com');
