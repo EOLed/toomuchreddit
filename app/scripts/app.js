@@ -8,9 +8,9 @@ angular.module('tmrApp', [
 ])
   .config(function ($routeProvider) {
     $routeProvider
-      .when('/', {
-        templateUrl: 'views/main.html',
-        controller: 'MainCtrl'
+      .when('/r/:subreddit/comments/:id/:slug', {
+        templateUrl: 'views/comments.html',
+        controller: 'CommentsCtrl'
       })
       .otherwise({
         redirectTo: '/'
