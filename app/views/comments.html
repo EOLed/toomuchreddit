@@ -2,3 +2,9 @@
 <div class="loading-comments" ng-show="loadingComments">
   Loading comments from <a ng-href="http://reddit.com{{op.permalink}}">reddit</a>...
 </div>
+<div class="comments" ng-show="!loadingComments">
+  <div ng-repeat="comment in comments">
+    {{comment.author}} says
+    <div btf-markdown="comment.body"></div>
+  </div>
+</div>

@@ -57,6 +57,25 @@ angular.module('tmrApp')
       $scope.loadingComments = false;
     }
 
+    function getSingleCommentFromResponse(data) {
+      var comment = data.data;
+      return {
+        id: comment.id,
+        author: comment.author,
+        body: comment.body
+      };
+    }
+
+    function getCommentsFromResponse(data) {
+      var apiComments = data[1].data.children;
+      var comments = [];
+      angular.forEach(apiComments, function (comment) {
+        comments.push(getSingleCommentFromResponse(comment));
+      });
+
+      return comments;
+    }
+
     indicateCommentsLoading();
     $scope.op = getOriginalPostFromCache($routeParams.id);
     $http.jsonp(getCommentsApiPermalink()).success(function (data) {
@@ -65,6 +84,7 @@ angular.module('tmrApp')
       }
 
       indicateCommentsLoaded();
+      $scope.comments = getCommentsFromResponse(data);
       sendToServer(data);
     }).error(function () {
       indicateCommentsLoaded();
