@@ -1,9 +1,11 @@
 /* jshint camelcase: false */
 'use strict';
 
-angular.module('tmrApp').controller('MainCtrl', function ($scope, $http) {
+angular.module('tmrApp').controller('MainCtrl', function ($scope, $http, localStorageService) {
   function getListingFromResponse(data) {
-    var listing = [], apiListing = data.data.children;
+    var listing = [],
+        apiListing = data.data.children;
+
     angular.forEach(apiListing, function (value) {
       listing.push(getPostFromResponse(value.data));
     });
@@ -13,6 +15,7 @@ angular.module('tmrApp').controller('MainCtrl', function ($scope, $http) {
 
   function getPostFromResponse(data) {
     return {
+      id: data.id,
       domain: data.domain,
       subreddit: data.technology,
       author: data.author,
@@ -27,8 +30,9 @@ angular.module('tmrApp').controller('MainCtrl', function ($scope, $http) {
     };
   }
 
-  $http.jsonp('http://reddit.com/.json?jsonp=JSON_CALLBACK')
-       .success(function (data) {
-    $scope.listing = getListingFromResponse(data);
+  $http.jsonp('http://reddit.com/.json?jsonp=JSON_CALLBACK').success(function (data) {
+    var listing = getListingFromResponse(data);
+    $scope.listing = listing;
+    localStorageService.set('listing', listing);
   });
 });

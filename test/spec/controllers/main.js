@@ -6,7 +6,7 @@ describe('Controller: MainCtrl', function () {
   // load the controller's module
   beforeEach(module('tmrApp'));
 
-  var MainCtrl, scope, $httpBackend;
+  var MainCtrl, scope, $httpBackend, localStorageService;
   var frontPageListing = {
     data: {
       children: [
@@ -30,7 +30,7 @@ describe('Controller: MainCtrl', function () {
           data: {
             domain: 'self.Christianity',
             subreddit: 'Christianity',
-            id: '3jds93',
+            id: '1tbbe5',
             author: 'magnanamos',
             score: 1337,
             over_18: false,
@@ -46,7 +46,7 @@ describe('Controller: MainCtrl', function () {
           data: {
             domain: 'i.imgur.com',
             subreddit: 'Coffee',
-            id: '224bu',
+            id: '1tc5rp',
             author: 'sebash',
             score: 31,
             over_18: false,
@@ -63,8 +63,10 @@ describe('Controller: MainCtrl', function () {
   };
 
   // Initialize the controller and a mock scope
-  beforeEach(inject(function ($controller, $rootScope, _$httpBackend_) {
+  beforeEach(inject(function ($controller, $rootScope, _$httpBackend_, _localStorageService_) {
     scope = $rootScope.$new();
+    localStorageService = _localStorageService_;
+    spyOn(localStorageService, 'set');
     $httpBackend = _$httpBackend_;
     $httpBackend.expectJSONP('http://reddit.com/.json?jsonp=JSON_CALLBACK')
                 .respond(200, frontPageListing);
@@ -76,11 +78,18 @@ describe('Controller: MainCtrl', function () {
   }));
 
   it('attaches listing to scope', function () {
+    expect(scope.listing[0].id).toEqual('1tcabu');
     expect(scope.listing[0].permalink)
       .toEqual('/r/technology/comments/1tcabu/tmobiles_next_move_could_be_devastating_for_att/');
+    expect(scope.listing[1].id).toEqual('1tbbe5');
     expect(scope.listing[1].permalink)
       .toEqual('/r/Christianity/comments/1tbbe5/the_most_wise_thing_ive_heard_about_the_duck/');
+    expect(scope.listing[2].id).toEqual('1tc5rp');
     expect(scope.listing[2].permalink)
       .toEqual('/r/Coffee/comments/1tc5rp/amazing_hawaiian_coffee_menu/');
+  });
+
+  it('stores listing into localstorage', function () {
+    expect(localStorageService.set).toHaveBeenCalledWith('listing', scope.listing);
   });
 });
