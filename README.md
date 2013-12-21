@@ -1,7 +1,4 @@
-# Too Much Reddit
-[![Build Status](https://travis-ci.org/achan/toomuchreddit.png?branch=master)](https://travis-ci.org/achan/toomuchreddit)
-[![Code Climate](https://codeclimate.com/github/achan/toomuchreddit.png)](https://codeclimate.com/github/achan/toomuchreddit)
-=============
+# Too Much Reddit [![Build Status](https://travis-ci.org/achan/toomuchreddit.png?branch=master)](https://travis-ci.org/achan/toomuchreddit) [![Code Climate](https://codeclimate.com/github/achan/toomuchreddit.png)](https://codeclimate.com/github/achan/toomuchreddit)
 
 Too Much Reddit (TMR) is aimed at leveraging visitors to fetch data from reddit
 and send them back to TMR in order to provide a virtually real-time comments
