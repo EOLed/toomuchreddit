@@ -49,14 +49,25 @@ angular.module('tmrApp')
       return $scope.op === null;
     }
 
+    function indicateCommentsLoading() {
+      $scope.loadingComments = true;
+    }
+
+    function indicateCommentsLoaded() {
+      $scope.loadingComments = false;
+    }
+
+    indicateCommentsLoading();
     $scope.op = getOriginalPostFromCache($routeParams.id);
     $http.jsonp(getCommentsApiPermalink()).success(function (data) {
       if (isOpNotFoundInCache()) {
         $scope.op = getOriginalPostFromResponse(data);
       }
 
+      indicateCommentsLoaded();
       sendToServer(data);
     }).error(function () {
+      indicateCommentsLoaded();
       console.log('could not send comments to toomuchreddit.com');
     });
   }

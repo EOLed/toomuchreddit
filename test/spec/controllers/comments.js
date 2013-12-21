@@ -6,7 +6,7 @@ describe('Controller: CommentsCtrl', function () {
   // load the controller's module
   beforeEach(module('tmrApp'));
 
-  var CommentsCtrl, scope, $routeParams, $httpBackend, localStorageService;
+  var scope, $routeParams, $httpBackend, localStorageService;
   var commentListing = [
     {
       kind: 'Listing',
@@ -29,25 +29,70 @@ describe('Controller: CommentsCtrl', function () {
 
   beforeEach(
     inject(
-      function ($controller, $rootScope, _$routeParams_, _$httpBackend_, _localStorageService_) {
+      function ($rootScope, _$routeParams_, _$httpBackend_, _localStorageService_) {
         scope = $rootScope.$new();
         $httpBackend = _$httpBackend_;
         $routeParams = _$routeParams_;
         $routeParams.subreddit = 'nba';
         $routeParams.id = '1t';
         $routeParams.slug = 'kobe_out';
-        $httpBackend
-          .expectJSONP('http://reddit.com/r/nba/comments/1t/kobe_out.json?jsonp=JSON_CALLBACK')
-          .respond(200, commentListing);
-        $httpBackend.expectPOST('/comments', commentListing).respond(200, { });
-
         localStorageService = _localStorageService_;
       }
     )
   );
 
+  function loadController($controller) {
+    return $controller('CommentsCtrl', {
+      $scope: scope,
+      $routeParams: $routeParams,
+      $httpBackend: $httpBackend
+    });
+  }
+
+  describe('scope.loadingComments', function () {
+    it('returns true while in process of loading comments', inject(function ($controller) {
+      $httpBackend
+        .expectJSONP('http://reddit.com/r/nba/comments/1t/kobe_out.json?jsonp=JSON_CALLBACK')
+        .respond(200, commentListing);
+
+      loadController($controller);
+
+      expect(scope.loadingComments).toBeTruthy();
+    }));
+
+    it('returns false on failure of retrieving comments', inject(function ($controller) {
+      $httpBackend
+        .expectJSONP('http://reddit.com/r/nba/comments/1t/kobe_out.json?jsonp=JSON_CALLBACK')
+        .respond(500);
+
+      loadController($controller);
+
+      $httpBackend.flush();
+
+      expect(scope.loadingComments).toBeFalsy();
+    }));
+
+    it('returns false on success of retrieving comments', inject(function ($controller) {
+      $httpBackend
+        .expectJSONP('http://reddit.com/r/nba/comments/1t/kobe_out.json?jsonp=JSON_CALLBACK')
+        .respond(200, commentListing);
+      $httpBackend.expectPOST('/comments', commentListing).respond(200, { });
+
+      loadController($controller);
+
+      $httpBackend.flush();
+
+      expect(scope.loadingComments).toBeFalsy();
+    }));
+  });
+
   describe('OP found in cache', function () {
     beforeEach(inject(function ($controller) {
+      $httpBackend
+        .expectJSONP('http://reddit.com/r/nba/comments/1t/kobe_out.json?jsonp=JSON_CALLBACK')
+        .respond(200, commentListing);
+      $httpBackend.expectPOST('/comments', commentListing).respond(200, { });
+
       spyOn(localStorageService, 'get').andReturn([{
         id: '1t',
         title: 'test title',
@@ -64,11 +109,9 @@ describe('Controller: CommentsCtrl', function () {
         subreddit: 'technology',
         domain: 'bgr.com'
       }]);
-      CommentsCtrl = $controller('CommentsCtrl', {
-        $scope: scope,
-        $routeParams: $routeParams,
-        $httpBackend: $httpBackend
-      });
+
+      loadController($controller);
+
       $httpBackend.flush();
     }));
 
@@ -80,12 +123,13 @@ describe('Controller: CommentsCtrl', function () {
 
   describe('OP not found in cache', function () {
     beforeEach(inject(function ($controller) {
+      $httpBackend
+        .expectJSONP('http://reddit.com/r/nba/comments/1t/kobe_out.json?jsonp=JSON_CALLBACK')
+        .respond(200, commentListing);
+      $httpBackend.expectPOST('/comments', commentListing).respond(200, { });
+
       spyOn(localStorageService, 'get').andReturn(null);
-      CommentsCtrl = $controller('CommentsCtrl', {
-        $scope: scope,
-        $routeParams: $routeParams,
-        $httpBackend: $httpBackend
-      });
+      loadController($controller);
       $httpBackend.flush();
     }));
 
