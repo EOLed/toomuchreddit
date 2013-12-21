@@ -2,7 +2,7 @@
 
 angular.module('tmrApp')
   .controller('CommentsCtrl', function ($scope, $routeParams, $http, localStorageService) {
-    function getCommentsJsonPermalink() {
+    function getCommentsApiPermalink() {
       return 'http://reddit.com/' + getCommentsPermalink() + '.json?jsonp=JSON_CALLBACK';
     }
 
@@ -15,11 +15,18 @@ angular.module('tmrApp')
       return $http.post('/comments', data);
     }
 
-    function getOriginalPostFromLocalStorage(postId) {
+    function getOriginalPostFromCache(postId) {
       var listing = localStorageService.get('listing');
+
+      if (listing === null) {
+        return null;
+      }
+
+      var op = null;
       var opNotFound = true;
-      var op;
       angular.forEach(listing, function (post) {
+        // no support for breaking angular.forEach :(
+        // https://github.com/angular/angular.js/issues/263
         if (opNotFound && post.id === postId) {
           op = post;
           opNotFound = false;
@@ -29,13 +36,28 @@ angular.module('tmrApp')
       return op;
     }
 
-    $scope.op = getOriginalPostFromLocalStorage($routeParams.id);
-    $http.jsonp(getCommentsJsonPermalink())
-      .success(function (data) {
-        sendToServer(data);
-      }).error(function () {
-        console.log('could not send comments to toomuchreddit.com');
+    function getOriginalPostFromResponse(data) {
+      var op = data[0].data.children[0].data;
+      return {
+        title: op.title,
+        subreddit: op.subreddit,
+        domain: op.domain
+      };
+    }
+
+    function isOpNotFoundInCache() {
+      return $scope.op === null;
+    }
+
+    $scope.op = getOriginalPostFromCache($routeParams.id);
+    $http.jsonp(getCommentsApiPermalink()).success(function (data) {
+      if (isOpNotFoundInCache()) {
+        $scope.op = getOriginalPostFromResponse(data);
       }
-    );
+
+      sendToServer(data);
+    }).error(function () {
+      console.log('could not send comments to toomuchreddit.com');
+    });
   }
 );
