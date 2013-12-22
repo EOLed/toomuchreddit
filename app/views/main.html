@@ -1,3 +1,5 @@
-<div ng-repeat="post in listing">
-  <a ng-href="#{{post.permalink}}" ng-bind-html="post.title"></a> by {{post.author}}
+<div class="container listing">
+  <div ng-repeat="post in listing">
+    <a ng-href="#{{post.permalink}}" ng-bind-html="post.title"></a> by {{post.author}}
+  </div>
 </div>
