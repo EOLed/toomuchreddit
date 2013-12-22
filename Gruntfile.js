@@ -36,8 +36,8 @@ module.exports = function (grunt) {
         tasks: ['newer:jshint:test', 'karma']
       },
       styles: {
-        files: ['<%= yeoman.app %>/styles/{,*/}*.css'],
-        tasks: ['newer:copy:styles', 'autoprefixer']
+        files: ['<%= yeoman.app %>/styles/{,*/}*.less'],
+        tasks: ['less', 'newer:copy:styles', 'autoprefixer']
       },
       gruntfile: {
         files: ['Gruntfile.js']
@@ -281,6 +281,17 @@ module.exports = function (grunt) {
         'svgmin',
         'htmlmin'
       ]
+    },
+
+    less: {
+      development: {
+        options: {
+          paths: ['<%= yeoman.app %>/styles'],
+        },
+        files: {
+          '<%= yeoman.app %>/styles/main.css': '<%= yeoman.app %>/styles/main.less'
+        }
+      }
     },
 
     // By default, your `index.html`'s <!-- Usemin block --> will take care of
