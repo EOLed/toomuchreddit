@@ -26,7 +26,8 @@ angular.module('tmrApp').controller('MainCtrl', function ($scope, $http, localSt
       url: data.url,
       title: data.title,
       numComments: data.num_comments,
-      visited: data.visited
+      visited: data.visited,
+      isSelfPost: data.is_self
     };
   }
 

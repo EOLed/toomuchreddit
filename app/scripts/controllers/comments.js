@@ -1,3 +1,4 @@
+/* jshint camelcase: false */
 'use strict';
 
 angular.module('tmrApp')
@@ -41,7 +42,9 @@ angular.module('tmrApp')
       return {
         title: op.title,
         subreddit: op.subreddit,
-        domain: op.domain
+        domain: op.domain,
+        url: op.url,
+        isSelfPost: op.is_self
       };
     }
 

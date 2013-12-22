@@ -15,9 +15,11 @@ describe('Controller: CommentsCtrl', function () {
           domain: 'nba.com',
           subreddit: 'nba',
           id: '1t',
+          url: 'http://nba.com/news',
           author: 'magnanamos',
           subreddit_id: 't5_2fwo',
-          title: 'test title'
+          title: 'test title',
+          is_self: false
         }
       }]
     }
@@ -128,7 +130,9 @@ describe('Controller: CommentsCtrl', function () {
         id: '1t',
         title: 'test title',
         subreddit: 'nba',
-        domain: 'nba.com'
+        domain: 'nba.com',
+        url: 'http://nba.com/news',
+        isSelfPost: false
       }, {
         id: 'notthis',
         title: 'bogus title',
@@ -183,6 +187,14 @@ describe('Controller: CommentsCtrl', function () {
 
       it('contains the op domain', function () {
         expect(scope.op.domain).toEqual('nba.com');
+      });
+
+      it('contains the op url', function () {
+        expect(scope.op.url).toEqual('http://nba.com/news');
+      });
+
+      it('contains whether op is a self post', function () {
+        expect(scope.op.isSelfPost).toBeFalsy();
       });
     });
   }

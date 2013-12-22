@@ -1,10 +1,18 @@
-<h1>{{op.title}} <small>{{op.domain}}</small></h1>
-<div class="loading-comments" ng-show="loadingComments">
+<div class="post-title">
+  <h1 class="container">
+    <span ng-bind="op.title" ng-show="op.isSelfPost"></span>
+    <a ng-href="{{op.url}}" ng-bind="op.title" ng-show="!op.isSelfPost"></a>
+    <small>{{op.domain}}</small>
+  </h1>
+</div>
+<div class="container loading-comments" ng-show="loadingComments">
   Loading comments from <a ng-href="http://reddit.com{{op.permalink}}">reddit</a>...
 </div>
-<div class="comments" ng-show="!loadingComments">
-  <div ng-repeat="comment in comments">
-    {{comment.author}} says
-    <div btf-markdown="comment.body"></div>
+<div class="container comments" ng-show="!loadingComments">
+  <div class="comment" ng-repeat="comment in comments">
+    <div class="author">
+      <a ng-href="http://reddit.com/user/{{comment.author}}">{{comment.author}}</a>
+    </div>
+    <div class="body" btf-markdown="comment.body"></div>
   </div>
 </div>

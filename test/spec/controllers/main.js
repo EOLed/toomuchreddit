@@ -23,7 +23,8 @@ describe('Controller: MainCtrl', function () {
             url: 'http://bgr.com/2013/12/20/t-mobile-uncarrier-4-rumor',
             title: 'T-Mobile’s next move could be devastating for AT&amp;T and Verizon: Paying off subscribers’ early termination fees if they switch from a rival carrier.',
             num_comments: 1577,
-            visited: false
+            visited: false,
+            is_self: false
           }
         },
         {
@@ -39,7 +40,8 @@ describe('Controller: MainCtrl', function () {
             url: 'http://www.reddit.com/r/Christianity/comments/1tbbe5/the_most_wise_thing_ive_heard_about_the_duck/',
             title: 'The most wise thing I\'ve heard about the Duck Dynasty issue.',
             num_comments: 123,
-            visited: false
+            visited: false,
+            is_self: true
           }
         },
         {
@@ -55,7 +57,8 @@ describe('Controller: MainCtrl', function () {
             url: 'http://i.imgur.com/CF5GbTZ.jpg',
             title: 'Amazing Hawaiian Coffee Menu',
             num_comments: 21,
-            visited: false
+            visited: false,
+            is_self: false
           }
         }
       ]
@@ -79,12 +82,19 @@ describe('Controller: MainCtrl', function () {
 
   it('attaches listing to scope', function () {
     expect(scope.listing[0].id).toEqual('1tcabu');
+    expect(scope.listing[0].isSelfPost).toEqual(false);
+    expect(scope.listing[0].url).toEqual('http://bgr.com/2013/12/20/t-mobile-uncarrier-4-rumor');
     expect(scope.listing[0].permalink)
       .toEqual('/r/technology/comments/1tcabu/tmobiles_next_move_could_be_devastating_for_att/');
     expect(scope.listing[1].id).toEqual('1tbbe5');
+    expect(scope.listing[1].isSelfPost).toEqual(true);
+    expect(scope.listing[1].url)
+      .toEqual('http://www.reddit.com/r/Christianity/comments/1tbbe5/the_most_wise_thing_ive_heard_about_the_duck/');
     expect(scope.listing[1].permalink)
       .toEqual('/r/Christianity/comments/1tbbe5/the_most_wise_thing_ive_heard_about_the_duck/');
     expect(scope.listing[2].id).toEqual('1tc5rp');
+    expect(scope.listing[2].isSelfPost).toEqual(false);
+    expect(scope.listing[2].url).toEqual('http://i.imgur.com/CF5GbTZ.jpg');
     expect(scope.listing[2].permalink)
       .toEqual('/r/Coffee/comments/1tc5rp/amazing_hawaiian_coffee_menu/');
   });
