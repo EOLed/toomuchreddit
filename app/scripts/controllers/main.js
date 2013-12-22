@@ -17,7 +17,7 @@ angular.module('tmrApp').controller('MainCtrl', function ($scope, $http, localSt
     return {
       id: data.id,
       domain: data.domain,
-      subreddit: data.technology,
+      subreddit: data.subreddit,
       author: data.author,
       score: data.score,
       over18: data.over_18,

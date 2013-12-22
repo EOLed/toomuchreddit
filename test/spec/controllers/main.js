@@ -82,17 +82,20 @@ describe('Controller: MainCtrl', function () {
 
   it('attaches listing to scope', function () {
     expect(scope.listing[0].id).toEqual('1tcabu');
+    expect(scope.listing[0].subreddit).toEqual('technology');
     expect(scope.listing[0].isSelfPost).toEqual(false);
     expect(scope.listing[0].url).toEqual('http://bgr.com/2013/12/20/t-mobile-uncarrier-4-rumor');
     expect(scope.listing[0].permalink)
       .toEqual('/r/technology/comments/1tcabu/tmobiles_next_move_could_be_devastating_for_att/');
     expect(scope.listing[1].id).toEqual('1tbbe5');
+    expect(scope.listing[1].subreddit).toEqual('Christianity');
     expect(scope.listing[1].isSelfPost).toEqual(true);
     expect(scope.listing[1].url)
       .toEqual('http://www.reddit.com/r/Christianity/comments/1tbbe5/the_most_wise_thing_ive_heard_about_the_duck/');
     expect(scope.listing[1].permalink)
       .toEqual('/r/Christianity/comments/1tbbe5/the_most_wise_thing_ive_heard_about_the_duck/');
     expect(scope.listing[2].id).toEqual('1tc5rp');
+    expect(scope.listing[2].subreddit).toEqual('Coffee');
     expect(scope.listing[2].isSelfPost).toEqual(false);
     expect(scope.listing[2].url).toEqual('http://i.imgur.com/CF5GbTZ.jpg');
     expect(scope.listing[2].permalink)
