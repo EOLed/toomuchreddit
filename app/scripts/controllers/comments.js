@@ -44,7 +44,8 @@ angular.module('tmrApp')
         subreddit: op.subreddit,
         domain: op.domain,
         url: op.url,
-        isSelfPost: op.is_self
+        isSelfPost: op.is_self,
+        authorFlairText: op.author_flair_text
       };
     }
 
@@ -65,7 +66,8 @@ angular.module('tmrApp')
       return {
         id: comment.id,
         author: comment.author,
-        body: comment.body
+        body: comment.body,
+        authorFlairText: comment.author_flair_text
       };
     }
 

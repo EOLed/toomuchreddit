@@ -24,7 +24,8 @@ describe('Controller: MainCtrl', function () {
             title: 'T-Mobile’s next move could be devastating for AT&amp;T and Verizon: Paying off subscribers’ early termination fees if they switch from a rival carrier.',
             num_comments: 1577,
             visited: false,
-            is_self: false
+            is_self: false,
+            author_flair_text: 'My Flair'
           }
         },
         {
@@ -41,7 +42,8 @@ describe('Controller: MainCtrl', function () {
             title: 'The most wise thing I\'ve heard about the Duck Dynasty issue.',
             num_comments: 123,
             visited: false,
-            is_self: true
+            is_self: true,
+            author_flair_text: null
           }
         },
         {
@@ -58,7 +60,8 @@ describe('Controller: MainCtrl', function () {
             title: 'Amazing Hawaiian Coffee Menu',
             num_comments: 21,
             visited: false,
-            is_self: false
+            is_self: false,
+            author_flair_text: null
           }
         }
       ]
@@ -84,12 +87,14 @@ describe('Controller: MainCtrl', function () {
     expect(scope.listing[0].id).toEqual('1tcabu');
     expect(scope.listing[0].subreddit).toEqual('technology');
     expect(scope.listing[0].isSelfPost).toEqual(false);
+    expect(scope.listing[0].authorFlairText).toEqual('My Flair');
     expect(scope.listing[0].url).toEqual('http://bgr.com/2013/12/20/t-mobile-uncarrier-4-rumor');
     expect(scope.listing[0].permalink)
       .toEqual('/r/technology/comments/1tcabu/tmobiles_next_move_could_be_devastating_for_att/');
     expect(scope.listing[1].id).toEqual('1tbbe5');
     expect(scope.listing[1].subreddit).toEqual('Christianity');
     expect(scope.listing[1].isSelfPost).toEqual(true);
+    expect(scope.listing[1].authorFlairText).toEqual(null);
     expect(scope.listing[1].url)
       .toEqual('http://www.reddit.com/r/Christianity/comments/1tbbe5/the_most_wise_thing_ive_heard_about_the_duck/');
     expect(scope.listing[1].permalink)
@@ -97,6 +102,7 @@ describe('Controller: MainCtrl', function () {
     expect(scope.listing[2].id).toEqual('1tc5rp');
     expect(scope.listing[2].subreddit).toEqual('Coffee');
     expect(scope.listing[2].isSelfPost).toEqual(false);
+    expect(scope.listing[2].authorFlairText).toEqual(null);
     expect(scope.listing[2].url).toEqual('http://i.imgur.com/CF5GbTZ.jpg');
     expect(scope.listing[2].permalink)
       .toEqual('/r/Coffee/comments/1tc5rp/amazing_hawaiian_coffee_menu/');

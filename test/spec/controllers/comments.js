@@ -19,7 +19,8 @@ describe('Controller: CommentsCtrl', function () {
           author: 'magnanamos',
           subreddit_id: 't5_2fwo',
           title: 'test title',
-          is_self: false
+          is_self: false,
+          author_flair_text: 'Raptors'
         }
       }]
     }
@@ -32,7 +33,8 @@ describe('Controller: CommentsCtrl', function () {
           id: 'ce31a',
           author: 'mrlamb',
           subreddit: 'nba',
-          body: 'test body'
+          body: 'test body',
+          author_flair_text: 'Raptors'
         }
       }, {
         kind: 't1',
@@ -40,7 +42,8 @@ describe('Controller: CommentsCtrl', function () {
           id: 'ce1a',
           author: 'magnanamos',
           subreddit: 'nba',
-          body: 'test again'
+          body: 'test again',
+          author_flair_text: null
         }
       }]
     }
@@ -107,11 +110,13 @@ describe('Controller: CommentsCtrl', function () {
         var expectedComments = [{
           id: 'ce31a',
           author: 'mrlamb',
-          body: 'test body'
+          body: 'test body',
+          authorFlairText: 'Raptors'
         }, {
           id: 'ce1a',
           author: 'magnanamos',
-          body: 'test again'
+          body: 'test again',
+          authorFlairText: null
         }];
 
         expect(scope.comments).toEqual(expectedComments);
@@ -132,7 +137,8 @@ describe('Controller: CommentsCtrl', function () {
         subreddit: 'nba',
         domain: 'nba.com',
         url: 'http://nba.com/news',
-        isSelfPost: false
+        isSelfPost: false,
+        authorFlairText: 'Raptors'
       }, {
         id: 'notthis',
         title: 'bogus title',
@@ -195,6 +201,10 @@ describe('Controller: CommentsCtrl', function () {
 
       it('contains whether op is a self post', function () {
         expect(scope.op.isSelfPost).toBeFalsy();
+      });
+
+      it('contains op author flair text', function () {
+        expect(scope.op.authorFlairText).toEqual('Raptors');
       });
     });
   }
