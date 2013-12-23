@@ -1,22 +1,32 @@
+@normal-spacing: 10px;
+@muted-color: #eee;
+@primary-text-color: #222;
+@highlighted-text-color: #1d718c;
+
+.loading-comments {
+  margin-top: @normal-spacing;
+  margin-bottom: @normal-spacing;;
+}
+
 div.post-title {
   background-color: #222;
-  color: #eee;
+  color: @muted-color;
 
   h1 {
     font-size: 21px;
     font-weight: normal;
     margin-top: 0;
     margin-bottom: 0;
-    padding-top: 10px;
-    padding-bottom: 10px;
+    padding-top: @normal-spacing;
+    padding-bottom: @normal-spacing;
   }
 }
 
 .post {
   border-top-style: solid;
   border-top-width: 1px;
-  border-top-color: #eee;
-  padding: 10px 0;
+  border-top-color: @muted-color;
+  padding: @normal-spacing 0;
 
   .author {
     font-weight: bold;
@@ -30,11 +40,19 @@ div.post-title {
 .comment {
   border-top-style: solid;
   border-top-width: 1px;
-  border-top-color: #eee;
-  padding: 10px 0;
+  border-top-color: @muted-color;
+  padding: @normal-spacing 0;
 
   .author {
     font-weight: bold;
+
+    a {
+      color: @primary-text-color;
+    }
+
+    a:hover {
+      color: @highlighted-text-color;
+    }
   }
 
   .body {
