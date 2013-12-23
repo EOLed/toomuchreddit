@@ -67,7 +67,8 @@ angular.module('tmrApp')
         id: comment.id,
         author: comment.author,
         body: comment.body,
-        authorFlairText: comment.author_flair_text
+        authorFlairText: comment.author_flair_text,
+        created: new Date(comment.created_utc * 1000)
       };
     }
 
@@ -75,7 +76,9 @@ angular.module('tmrApp')
       var apiComments = data[1].data.children;
       var comments = [];
       angular.forEach(apiComments, function (comment) {
-        comments.push(getSingleCommentFromResponse(comment));
+        if (comment.kind === 't1') {
+          comments.push(getSingleCommentFromResponse(comment));
+        }
       });
 
       return comments;

@@ -19,6 +19,8 @@ module.exports = function(config) {
       'app/bower_components/angular-mocks/angular-mocks.js',
       'app/bower_components/angular-local-storage/angular-local-storage.js',
       'app/bower_components/angular-snuownd/app/scripts/directives/snuownd.js',
+      'app/bower_components/momentjs/moment.js',
+      'app/bower_components/angular-moment/angular-moment.js',
       'app/scripts/*.js',
       'app/scripts/**/*.js',
       'test/mock/**/*.js',
