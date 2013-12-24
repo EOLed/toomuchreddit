@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('tmrApp').directive('comment', function () {
+angular.module('tmrApp').directive('comment', function (recursionHelper) {
   return {
     templateUrl: 'views/directives/comment.html',
     restrict: 'E',
@@ -8,6 +8,9 @@ angular.module('tmrApp').directive('comment', function () {
       'comment': '='
     },
     link: function () {
+    },
+    compile: function (element) {
+      return recursionHelper.compile(element);
     }
   };
 });

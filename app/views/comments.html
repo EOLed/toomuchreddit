@@ -8,6 +8,6 @@
 <div class="container loading-comments" ng-show="loadingComments">
   Loading comments from <a ng-href="http://reddit.com{{op.permalink}}">reddit</a>...
 </div>
-<div class="container comments" ng-show="!loadingComments" ng-repeat="comment in comments">
+<div class="comments" ng-show="!loadingComments" ng-repeat="comment in comments">
   <comment comment="comment"></comment>
 </div>

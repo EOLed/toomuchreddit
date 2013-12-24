@@ -1,8 +1,10 @@
 @normal-spacing: 10px;
+@thin-spacing: 5px;
 @muted-color: #eee;
 @primary-text-color: #222;
 @highlighted-text-color: #1d718c;
 @muted-text-color: #aaa;
+@muted-outline-color: #ccc;
 
 .loading-comments {
   margin-top: @normal-spacing;
@@ -70,5 +72,43 @@ div.post-title {
 
   .body {
 
+  }
+}
+
+.reply-border (@color: @muted-outline-color) {
+  border-top-color: @color;
+  border-left-color: @color;
+  border-left-width: @thin-spacing;
+  border-left-style: solid;
+}
+
+.replies {
+  .comment {
+    background-color: #efefef;
+    .reply-border(#cc333f);
+  }
+
+  .replies {
+    .comment {
+      .reply-border(#00a0b0);
+    }
+
+    .replies {
+      .comment {
+        .reply-border(#6a4a3c);
+      }
+
+      .replies {
+        .comment {
+          .reply-border(#eb6841);
+        }
+
+        .replies {
+          .comment {
+            .reply-border(#edc951);
+          }
+        }
+      }
+    }
   }
 }

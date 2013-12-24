@@ -14,7 +14,8 @@ describe('Directive: comment', function () {
       author: 'achan',
       authorFlairText: 'Raptors',
       created: new Date(new Date().getTime() - 3 * 60 * 1000),
-      body: '**hello**'
+      body: '**hello**',
+      replies: []
     };
     element = angular.element('<comment comment="comment"></comment>');
     element = $compile(element)(scope);
