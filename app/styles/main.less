@@ -75,37 +75,37 @@ div.post-title {
   }
 }
 
-.reply-border (@color: @muted-outline-color) {
+.reply-border (@color: @muted-outline-color, @padding: 1px) {
   border-top-color: @color;
   border-left-color: @color;
-  border-left-width: @thin-spacing;
+  border-left-width: @padding;
   border-left-style: solid;
 }
 
 .replies {
   .comment {
     background-color: #efefef;
-    .reply-border(#cc333f);
+    .reply-border(#cc333f, 2px);
   }
 
   .replies {
     .comment {
-      .reply-border(#00a0b0);
+      .reply-border(#00a0b0, 3px);
     }
 
     .replies {
       .comment {
-        .reply-border(#6a4a3c);
+        .reply-border(#6a4a3c, 4px);
       }
 
       .replies {
         .comment {
-          .reply-border(#eb6841);
+          .reply-border(#eb6841, 5px);
         }
 
         .replies {
           .comment {
-            .reply-border(#edc951);
+            .reply-border(#edc951, 6px);
           }
         }
       }
