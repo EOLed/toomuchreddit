@@ -6,7 +6,7 @@ describe('Controller: CommentsCtrl', function () {
   // load the controller's module
   beforeEach(module('tmrApp'));
 
-  var scope, $routeParams, $httpBackend, localStorageService;
+  var scope, $routeParams, $httpBackend, localStorageService, $interval;
   var commentListing = [{
     kind: 'Listing',
     data: {
@@ -75,7 +75,7 @@ describe('Controller: CommentsCtrl', function () {
     }
   }];
 
-  beforeEach(inject(function ($rootScope, _$routeParams_, _$httpBackend_, _localStorageService_) {
+  beforeEach(inject(function ($rootScope, _$routeParams_, _$httpBackend_, _localStorageService_, _$interval_) {
     scope = $rootScope.$new();
     $httpBackend = _$httpBackend_;
     $routeParams = _$routeParams_;
@@ -83,14 +83,17 @@ describe('Controller: CommentsCtrl', function () {
     $routeParams.id = '1t';
     $routeParams.slug = 'kobe_out';
     localStorageService = _localStorageService_;
+    $interval = _$interval_;
   }));
 
   function loadController($controller) {
-    return $controller('CommentsCtrl', {
+    var controller = $controller('CommentsCtrl', {
       $scope: scope,
       $routeParams: $routeParams,
       $httpBackend: $httpBackend
     });
+
+    return controller;
   }
 
   describe('loading comments', function () {
@@ -157,6 +160,23 @@ describe('Controller: CommentsCtrl', function () {
         }];
 
         expect(scope.comments).toEqual(expectedComments);
+      });
+
+      it('retrieves new comments every 20 seconds', function () {
+        $httpBackend
+          .expectJSONP('http://reddit.com/r/nba/comments/1t/kobe_out.json?sort=new&jsonp=JSON_CALLBACK')
+          .respond(200, commentListing);
+        $httpBackend.expectPOST('/comments', commentListing).respond(200, { });
+
+        $interval.flush(20000);
+
+        $httpBackend.flush();
+      });
+
+      it('cancels timer when controller is destroyed', function () {
+        scope.$destroy();
+        $interval.flush(20000);
+        $httpBackend.verifyNoOutstandingRequest();
       });
     });
   });
