@@ -36,7 +36,24 @@ describe('Controller: CommentsCtrl', function () {
           subreddit: 'nba',
           body: 'test body',
           author_flair_text: 'Raptors',
-          created_utc: 1387712489
+          created_utc: 1387712489,
+          replies: {
+            kind: 'Listing',
+            data: {
+              children: [{
+                kind: 't1',
+                data: {
+                  id: '1234',
+                  author: 'replier',
+                  subreddit: 'nba',
+                  body: 'my response',
+                  author_flair_text: 'Celtics',
+                  created_utc: 1387812489,
+                  replies: ''
+                }
+              }]
+            }
+          }
         }
       }, {
         kind: 't1',
@@ -46,7 +63,8 @@ describe('Controller: CommentsCtrl', function () {
           subreddit: 'nba',
           body: 'test again',
           author_flair_text: null,
-          created_utc: 1387722489
+          created_utc: 1387722489,
+          replies: ''
         }
       }, {
         kind: 'more',
@@ -120,13 +138,22 @@ describe('Controller: CommentsCtrl', function () {
           author: 'mrlamb',
           body: 'test body',
           authorFlairText: 'Raptors',
-          created: new Date(1387712489 * 1000)
+          created: new Date(1387712489 * 1000),
+          replies: [{
+            id: '1234',
+            author: 'replier',
+            authorFlairText: 'Celtics',
+            created: new Date(1387812489 * 1000),
+            body: 'my response',
+            replies: ''
+          }]
         }, {
           id: 'ce1a',
           author: 'magnanamos',
           body: 'test again',
           authorFlairText: null,
-          created: new Date(1387722489 * 1000)
+          created: new Date(1387722489 * 1000),
+          replies: ''
         }];
 
         expect(scope.comments).toEqual(expectedComments);

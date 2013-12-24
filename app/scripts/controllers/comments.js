@@ -68,14 +68,23 @@ angular.module('tmrApp')
         author: comment.author,
         body: comment.body,
         authorFlairText: comment.author_flair_text,
-        created: new Date(comment.created_utc * 1000)
+        created: new Date(comment.created_utc * 1000),
+        replies: getCommentsFromListing(comment.replies)
       };
     }
 
     function getCommentsFromResponse(data) {
-      var apiComments = data[1].data.children;
+      return getCommentsFromListing(data[1]);
+    }
+
+    function getCommentsFromListing(listing) {
+      if (listing === '') {
+        return '';
+      }
+
+      var listingComments = listing.data.children;
       var comments = [];
-      angular.forEach(apiComments, function (comment) {
+      angular.forEach(listingComments, function (comment) {
         if (comment.kind === 't1') {
           comments.push(getSingleCommentFromResponse(comment));
         }
