@@ -16,7 +16,8 @@
     "snuownd": "master",
     "angular-snuownd": "*",
     "momentjs": "~2.4.0",
-    "angular-moment": "~0.5.2"
+    "angular-moment": "~0.5.2",
+    "angular-previewer": "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.2.0",

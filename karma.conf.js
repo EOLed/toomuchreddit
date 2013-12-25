@@ -19,6 +19,7 @@ module.exports = function(config) {
       'bower_components/angular-mocks/angular-mocks.js',
       'bower_components/angular-local-storage/angular-local-storage.js',
       'bower_components/angular-snuownd/app/scripts/directives/snuownd.js',
+      'bower_components/angular-previewer/app/scripts/directives/previewer.js',
       'bower_components/snuownd/snuownd.js',
       'bower_components/momentjs/moment.js',
       'bower_components/angular-moment/angular-moment.js',

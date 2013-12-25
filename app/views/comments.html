@@ -11,10 +11,13 @@
       <div class="self-text" ng-show="op.isSelfPost">
         <div snuownd="op.selfText"></div>
       </div>
+      <div class="preview" ng-show="!op.isSelfPost">
+        <asc-previewer src="op.url"></asc-previewer>
+      </div>
     </div>
     <div class="col-md-5">
       <div class="loading-comments" ng-show="loadingComments">
-        Loading comments from <a ng-href="http://reddit.com{{op.permalink}}">reddit</a>...
+        Loading comments from <a ng-href="http://www.reddit.com{{op.permalink}}">reddit</a>...
       </div>
       <div class="comments" ng-show="!loadingComments" ng-repeat="comment in comments">
         <comment comment="comment"></comment>
