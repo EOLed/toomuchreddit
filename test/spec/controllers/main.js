@@ -89,6 +89,7 @@ describe('Controller: MainCtrl', function () {
   it('attaches listing to scope', function () {
     expect(scope.listing[0].id).toEqual('1tcabu');
     expect(scope.listing[0].subreddit).toEqual('technology');
+    expect(scope.listing[0].domain).toEqual('bgr.com');
     expect(scope.listing[0].isSelfPost).toEqual(false);
     expect(scope.listing[0].selfText).toEqual('');
     expect(scope.listing[0].authorFlairText).toEqual('My Flair');
@@ -97,6 +98,7 @@ describe('Controller: MainCtrl', function () {
       .toEqual('/r/technology/comments/1tcabu/tmobiles_next_move_could_be_devastating_for_att/');
     expect(scope.listing[1].id).toEqual('1tbbe5');
     expect(scope.listing[1].subreddit).toEqual('Christianity');
+    expect(scope.listing[1].domain).toEqual('self.Christianity');
     expect(scope.listing[1].isSelfPost).toEqual(true);
     expect(scope.listing[1].selfText).toEqual('this is the op');
     expect(scope.listing[1].authorFlairText).toEqual(null);
@@ -106,6 +108,7 @@ describe('Controller: MainCtrl', function () {
       .toEqual('/r/Christianity/comments/1tbbe5/the_most_wise_thing_ive_heard_about_the_duck/');
     expect(scope.listing[2].id).toEqual('1tc5rp');
     expect(scope.listing[2].subreddit).toEqual('Coffee');
+    expect(scope.listing[2].domain).toEqual('i.imgur.com');
     expect(scope.listing[2].isSelfPost).toEqual(false);
     expect(scope.listing[2].selfText).toEqual('');
     expect(scope.listing[2].authorFlairText).toEqual(null);
