@@ -28,7 +28,8 @@ angular.module('tmrApp').controller('MainCtrl', function ($scope, $http, localSt
       numComments: data.num_comments,
       visited: data.visited,
       isSelfPost: data.is_self,
-      authorFlairText: data.author_flair_text
+      authorFlairText: data.author_flair_text,
+      selfText: data.selftext
     };
   }
 

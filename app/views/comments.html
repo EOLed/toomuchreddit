@@ -5,6 +5,9 @@
     <small>{{op.domain}}</small>
   </h1>
 </div>
+<div class="self-text" ng-show="op.isSelfPost">
+  <div class="container" snuownd="op.selfText"></div>
+</div>
 <div class="container loading-comments" ng-show="loadingComments">
   Loading comments from <a ng-href="http://reddit.com{{op.permalink}}">reddit</a>...
 </div>

@@ -21,7 +21,8 @@ describe('Controller: CommentsCtrl', function () {
           title: 'test title',
           is_self: false,
           author_flair_text: 'Raptors',
-          created_utc: 1387762489
+          created_utc: 1387762489,
+          selftext: 'this is the op'
         }
       }]
     }
@@ -195,7 +196,8 @@ describe('Controller: CommentsCtrl', function () {
         domain: 'nba.com',
         url: 'http://nba.com/news',
         isSelfPost: false,
-        authorFlairText: 'Raptors'
+        authorFlairText: 'Raptors',
+        selfText: 'this is the op'
       }, {
         id: 'notthis',
         title: 'bogus title',
@@ -258,6 +260,10 @@ describe('Controller: CommentsCtrl', function () {
 
       it('contains whether op is a self post', function () {
         expect(scope.op.isSelfPost).toBeFalsy();
+      });
+
+      it('contains the op self text', function () {
+        expect(scope.op.selfText).toEqual('this is the op');
       });
 
       it('contains op author flair text', function () {

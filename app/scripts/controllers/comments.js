@@ -46,7 +46,8 @@ angular.module('tmrApp')
           domain: op.domain,
           url: op.url,
           isSelfPost: op.is_self,
-          authorFlairText: op.author_flair_text
+          authorFlairText: op.author_flair_text,
+          selfText: op.selftext
         };
       }
 
