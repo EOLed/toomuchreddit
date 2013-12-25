@@ -99,7 +99,7 @@ describe('Controller: CommentsCtrl', function () {
   describe('loading comments', function () {
     it('updates flag to indicate comments are loading', inject(function ($controller) {
       $httpBackend
-        .expectJSONP('http://reddit.com/r/nba/comments/1t/kobe_out.json?sort=new&jsonp=JSON_CALLBACK')
+        .expectJSONP('http://www.reddit.com/r/nba/comments/1t/kobe_out.json?sort=new&jsonp=JSON_CALLBACK')
         .respond(200, commentListing);
 
       loadController($controller);
@@ -109,7 +109,7 @@ describe('Controller: CommentsCtrl', function () {
 
     it('updates flag to indicate comments are done loading on failure', inject(function ($controller) {
       $httpBackend
-        .expectJSONP('http://reddit.com/r/nba/comments/1t/kobe_out.json?sort=new&jsonp=JSON_CALLBACK')
+        .expectJSONP('http://www.reddit.com/r/nba/comments/1t/kobe_out.json?sort=new&jsonp=JSON_CALLBACK')
         .respond(500);
 
       loadController($controller);
@@ -122,7 +122,7 @@ describe('Controller: CommentsCtrl', function () {
     describe('successfully retrieved comments', function () {
       beforeEach(inject(function($controller) {
         $httpBackend
-          .expectJSONP('http://reddit.com/r/nba/comments/1t/kobe_out.json?sort=new&jsonp=JSON_CALLBACK')
+          .expectJSONP('http://www.reddit.com/r/nba/comments/1t/kobe_out.json?sort=new&jsonp=JSON_CALLBACK')
           .respond(200, commentListing);
         $httpBackend.expectPOST('/comments', commentListing).respond(200, { });
 
@@ -164,7 +164,7 @@ describe('Controller: CommentsCtrl', function () {
 
       it('retrieves new comments every 20 seconds', function () {
         $httpBackend
-          .expectJSONP('http://reddit.com/r/nba/comments/1t/kobe_out.json?sort=new&jsonp=JSON_CALLBACK')
+          .expectJSONP('http://www.reddit.com/r/nba/comments/1t/kobe_out.json?sort=new&jsonp=JSON_CALLBACK')
           .respond(200, commentListing);
         $httpBackend.expectPOST('/comments', commentListing).respond(200, { });
 
@@ -184,7 +184,7 @@ describe('Controller: CommentsCtrl', function () {
   describe('OP found in cache', function () {
     beforeEach(inject(function ($controller) {
       $httpBackend
-        .expectJSONP('http://reddit.com/r/nba/comments/1t/kobe_out.json?sort=new&jsonp=JSON_CALLBACK')
+        .expectJSONP('http://www.reddit.com/r/nba/comments/1t/kobe_out.json?sort=new&jsonp=JSON_CALLBACK')
         .respond(200, commentListing);
       $httpBackend.expectPOST('/comments', commentListing).respond(200, { });
 
@@ -222,7 +222,7 @@ describe('Controller: CommentsCtrl', function () {
   describe('OP not found in cache', function () {
     beforeEach(inject(function ($controller) {
       $httpBackend
-        .expectJSONP('http://reddit.com/r/nba/comments/1t/kobe_out.json?sort=new&jsonp=JSON_CALLBACK')
+        .expectJSONP('http://www.reddit.com/r/nba/comments/1t/kobe_out.json?sort=new&jsonp=JSON_CALLBACK')
         .respond(200, commentListing);
       $httpBackend.expectPOST('/comments', commentListing).respond(200, { });
 

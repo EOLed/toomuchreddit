@@ -32,7 +32,7 @@ angular.module('tmrApp').controller('MainCtrl', function ($scope, $http, localSt
     };
   }
 
-  $http.jsonp('http://reddit.com/.json?jsonp=JSON_CALLBACK').success(function (data) {
+  $http.jsonp('http://www.reddit.com/.json?jsonp=JSON_CALLBACK').success(function (data) {
     var listing = getListingFromResponse(data);
     $scope.listing = listing;
     localStorageService.set('listing', listing);

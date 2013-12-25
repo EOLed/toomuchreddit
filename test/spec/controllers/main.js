@@ -74,7 +74,7 @@ describe('Controller: MainCtrl', function () {
     localStorageService = _localStorageService_;
     spyOn(localStorageService, 'set');
     $httpBackend = _$httpBackend_;
-    $httpBackend.expectJSONP('http://reddit.com/.json?jsonp=JSON_CALLBACK')
+    $httpBackend.expectJSONP('http://www.reddit.com/.json?jsonp=JSON_CALLBACK')
                 .respond(200, frontPageListing);
     MainCtrl = $controller('MainCtrl', {
       $scope: scope,

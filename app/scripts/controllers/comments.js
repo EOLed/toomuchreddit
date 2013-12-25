@@ -5,7 +5,7 @@ angular.module('tmrApp')
   .controller('CommentsCtrl',
     function ($scope, $routeParams, $http, localStorageService, $interval) {
       function getCommentsApiPermalink() {
-        return 'http://reddit.com/' + getCommentsPermalink() + '.json?sort=new&jsonp=JSON_CALLBACK';
+        return 'http://www.reddit.com/' + getCommentsPermalink() + '.json?sort=new&jsonp=JSON_CALLBACK';
       }
 
       function getCommentsPermalink() {
