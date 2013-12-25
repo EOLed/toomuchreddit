@@ -1,0 +1,7 @@
+<div class="container listing">
+  <div class="post" ng-repeat="post in listing">
+    <div class="author">{{post.author}}</div>
+    <a class="post-title" ng-href="#{{post.permalink}}" ng-bind-html="post.title"></a>
+    <span class="domain">({{post.domain}})</span>
+  </div>
+</div>

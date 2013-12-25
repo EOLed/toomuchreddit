@@ -9,8 +9,11 @@ angular.module('tmrApp',
       templateUrl: 'views/comments.html',
       controller: 'CommentsCtrl'
     }).when('/', {
-      templateUrl: 'views/main.html',
-      controller: 'MainCtrl'
+      templateUrl: 'views/listing.html',
+      controller: 'ListingCtrl'
+    }).when('/r/:subreddit', {
+      templateUrl: 'views/subreddit.html',
+      controller: 'ListingCtrl',
     }).otherwise({
       redirectTo: '/'
     });
