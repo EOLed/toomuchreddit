@@ -1,16 +1,24 @@
-<div class="post-title">
-  <h1 class="container">
-    <span ng-bind="op.title" ng-show="op.isSelfPost"></span>
-    <a ng-href="{{op.url}}" ng-bind="op.title" ng-show="!op.isSelfPost"></a>
-    <small>{{op.domain}}</small>
-  </h1>
-</div>
-<div class="self-text" ng-show="op.isSelfPost">
-  <div class="container" snuownd="op.selfText"></div>
-</div>
-<div class="container loading-comments" ng-show="loadingComments">
-  Loading comments from <a ng-href="http://reddit.com{{op.permalink}}">reddit</a>...
-</div>
-<div class="comments" ng-show="!loadingComments" ng-repeat="comment in comments">
-  <comment comment="comment"></comment>
+<div class="container comment-page">
+  <div class="row">
+    <div class="col-md-7">
+      <div class="post-title">
+        <h1>
+          <span ng-bind="op.title" ng-show="op.isSelfPost"></span>
+          <a ng-href="{{op.url}}" ng-bind="op.title" ng-show="!op.isSelfPost"></a>
+          <small>{{op.domain}}</small>
+        </h1>
+      </div>
+      <div class="self-text" ng-show="op.isSelfPost">
+        <div snuownd="op.selfText"></div>
+      </div>
+    </div>
+    <div class="col-md-5">
+      <div class="loading-comments" ng-show="loadingComments">
+        Loading comments from <a ng-href="http://reddit.com{{op.permalink}}">reddit</a>...
+      </div>
+      <div class="comments" ng-show="!loadingComments" ng-repeat="comment in comments">
+        <comment comment="comment"></comment>
+      </div>
+    </div>
+  </div>
 </div>

@@ -1,12 +1,10 @@
 <div class="comment">
-  <div class="container">
-    <div class="author">
-      <a ng-href="http://reddit.com/user/{{comment.author}}">{{comment.author}}</a>
-      <span class="flair-text">{{comment.authorFlairText}}</span>
-      <span class="pull-right timestamp" am-time-ago="comment.created"></span>
-    </div>
-    <div class="body" snuownd="comment.body"></div>
+  <div class="author">
+    <a ng-href="http://reddit.com/user/{{comment.author}}">{{comment.author}}</a>
+    <span class="flair-text">{{comment.authorFlairText}}</span>
+    <span class="pull-right timestamp" am-time-ago="comment.created"></span>
   </div>
+  <div class="body" snuownd="comment.body"></div>
 </div>
 <div class="replies" ng-repeat="reply in comment.replies">
   <comment comment="reply"></comment>
