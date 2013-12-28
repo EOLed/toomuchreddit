@@ -25,6 +25,7 @@ module.exports = function(config) {
       'bower_components/angular-moment/angular-moment.js',
       'scripts/*.js',
       'scripts/**/*.js',
+      'vendors/scripts/**/*.js',
       'views/directives/*.html',
       '../test/mock/**/*.js',
       '../test/spec/**/*.js'
