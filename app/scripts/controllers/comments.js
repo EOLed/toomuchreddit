@@ -98,7 +98,7 @@ angular.module('tmrApp')
       function loadLatestComments() {
         $http.jsonp(getCommentsApiPermalink()).success(function (data) {
           if (isOpNotFoundInCache()) {
-            $scope.op = getOriginalPostFromResponse(data);
+            setOriginalPost(getOriginalPostFromResponse(data));
           }
 
           indicateCommentsLoaded();
@@ -110,8 +110,18 @@ angular.module('tmrApp')
         });
       }
 
+      function setOriginalPost(op) {
+        $scope.op = op;
+
+        if (op === null) {
+          return;
+        }
+
+        $scope.subredditUrl = 'http://www.reddit.com/r/' + op.subreddit;
+      }
+
       indicateCommentsLoading();
-      $scope.op = getOriginalPostFromCache($routeParams.id);
+      setOriginalPost(getOriginalPostFromCache($routeParams.id));
       loadLatestComments();
       var loadLatestCommentsTimer = $interval(loadLatestComments, 20000, 0, false);
       $scope.$on('$destroy', function () {

@@ -1,26 +1,37 @@
 <div class="container comment-page">
   <div class="row">
-    <div class="col-md-7">
+    <div class="col-md-12">
       <div class="post-title">
         <h1>
-          <span ng-bind="op.title" ng-show="op.isSelfPost"></span>
-          <a ng-href="{{op.url}}" ng-bind="op.title" ng-show="!op.isSelfPost"></a>
+          <ng:switch on="op.isSelfPost">
+            <span ng-bind="op.title" ng:switch-when="true"></span>
+            <a ng-href="{{op.url}}" ng-bind="op.title" ng:switch-when="false"></a>
+          </ng:switch>
           <small>{{op.domain}}</small>
         </h1>
       </div>
-      <div class="self-text" ng-show="op.isSelfPost">
-        <div snuownd="op.selfText"></div>
-      </div>
-      <div class="preview" ng-show="!op.isSelfPost">
-        <asc-previewer src="op.url"></asc-previewer>
-      </div>
     </div>
+  </div>
+  <div class="row">
     <div class="col-md-5">
       <div class="loading-comments" ng-show="loadingComments">
         Loading comments from <a ng-href="http://www.reddit.com{{op.permalink}}">reddit</a>...
       </div>
       <div class="comments" ng-show="!loadingComments" ng-repeat="comment in comments">
         <comment comment="comment"></comment>
+      </div>
+    </div>
+    <div class="col-md-7">
+      <ng:switch on="op.isSelfPost">
+        <div class="self-text" ng:switch-when="true">
+          <div snuownd="op.selfText"></div>
+        </div>
+        <div class="preview" ng:switch-when="false">
+          <asc-previewer src="op.url"></asc-previewer>
+        </div>
+      </ng:switch>
+      <div class="subreddit-info">
+        <asc-previewer src="subredditUrl"></asc-previewer>
       </div>
     </div>
   </div>

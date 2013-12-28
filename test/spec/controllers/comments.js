@@ -270,5 +270,9 @@ describe('Controller: CommentsCtrl', function () {
         expect(scope.op.authorFlairText).toEqual('Raptors');
       });
     });
+
+    it('specifies the subreddit url for this post', function () {
+      expect(scope.subredditUrl).toEqual('http://www.reddit.com/r/nba');
+    });
   }
 });
