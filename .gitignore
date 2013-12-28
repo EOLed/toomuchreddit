@@ -5,3 +5,4 @@ dist
 app/bower_components
 *.swp
 app/styles/*.css
+app/coverage

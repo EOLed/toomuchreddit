@@ -30,8 +30,18 @@ module.exports = function(config) {
       '../test/spec/**/*.js'
     ],
 
+    reporters: ['progress', 'coverage'],
+
     preprocessors: {
-      'views/directives/*.html': 'html2js'
+      'views/directives/*.html': 'html2js',
+      'scripts/**/*.js': ['coverage']
+    },
+
+    coverageReporter: {
+      reporters: [
+        { type: 'html', dir: 'coverage/' },
+        { type: 'text' }
+      ]
     },
 
     // list of files / patterns to exclude
