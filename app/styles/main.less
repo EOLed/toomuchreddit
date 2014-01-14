@@ -2,9 +2,10 @@
 @thin-spacing: 5px;
 @muted-color: #eee;
 @primary-text-color: #424254;
-@highlighted-text-color: #1d718c;
+@highlighted-text-color: #ccc;
 @muted-text-color: #aaa;
 @muted-outline-color: #ccc;
+@detail-font-size: 12px;
 
 body {
   color: @primary-text-color;
@@ -21,7 +22,7 @@ body {
 }
 
 div.post-title {
-  background-color: #351330;
+  background-color: #222;
   color: @muted-color;
   .edge-padding;
 
@@ -35,7 +36,7 @@ div.post-title {
   }
 
   a, a:hover {
-    color: #e8caa4;
+    color: #fcfcfc;
   }
 }
 
@@ -63,16 +64,34 @@ a, a:hover {
   color: @highlighted-text-color;
 }
 
-.comment {
-  border-top-style: solid;
-  border-top-width: 1px;
-  border-top-color: @muted-color;
+.thin-left-border(@color) {
   border-left-style: solid;
   border-left-width: 1px;
-  border-left-color: @muted-outline-color;
+  border-left-color: @color;
+}
+
+.thin-top-border(@color) {
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: @color;
+}
+
+.thin-bottom-border(@color) {
+  border-bottom-style: solid;
+  border-bottom-width: 1px;
+  border-bottom-color: @color;
+}
+
+.thin-right-border(@color) {
   border-right-style: solid;
   border-right-width: 1px;
-  border-right-color: @muted-outline-color;
+  border-right-color: @color;
+}
+
+.comment {
+  .thin-right-border(@muted-color);
+  .thin-top-border(@muted-color);
+  .thin-left-border(@muted-color);
   .edge-padding;
   padding-top: @normal-spacing;
   padding-bottom: @normal-spacing;
@@ -98,6 +117,7 @@ a, a:hover {
     .flair-text {
       font-weight: normal;
       color: @muted-text-color;
+      color: @muted-color;
       font-size: 12px;
     }
   }
@@ -107,8 +127,29 @@ a, a:hover {
   }
 }
 
-.reply-border (@color: @muted-outline-color, @padding: 1px) {
-  border-top-color: @muted-outline-color;
+h2.heading {
+  font-size: @detail-font-size;
+  text-transform: uppercase;
+  .edge-padding;
+  padding-top: @normal-spacing;
+  padding-bottom: @normal-spacing;
+  color: @highlighted-text-color;
+  border-top-style: solid;
+  border-width: 1px;
+  border-color: @muted-color;
+}
+
+h2.heading.left {
+  border-left-style: solid;
+  border-right-style: solid;
+}
+
+h2.heading.right {
+  border-right-style: solid;
+}
+
+.reply-border (@color: @muted-color, @padding: 1px) {
+  border-top-color: @muted-color;
   border-left-color: @color;
   border-left-width: @padding;
   padding-left: @normal-spacing;
@@ -146,13 +187,48 @@ a, a:hover {
   }
 }
 
-.self-text, .preview {
-  background-color: #f3ebe1;
+.self-text, .preview, .subreddit-info {
+  background-color: #fff;
   .edge-padding;
   padding-top: @normal-spacing;
   padding-bottom: @normal-spacing;
+  border-top-style: solid;
+  border-right-style: solid;
+  border-width: 1px;
+  border-color: @muted-color;
 }
 
 .preview img {
   margin: auto;
+}
+
+.side-content {
+}
+
+.subreddit-info {
+  font-size: @detail-font-size;
+  padding-top: @normal-spacing;
+  padding-bottom: @normal-spacing;
+  border-bottom-style: solid;
+  border-width: 1px;
+
+  h1 {
+    font-size: @detail-font-size + 10;
+  }
+
+  h2 {
+    font-size: @detail-font-size + 8;
+  }
+
+  h3 {
+    font-size: @detail-font-size + 6;
+  }
+
+  h4 {
+    font-size: @detail-font-size + 4;
+  }
+
+  h5 {
+    font-size: @detail-font-size + 2;
+  }
 }

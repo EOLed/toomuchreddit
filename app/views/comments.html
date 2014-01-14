@@ -14,6 +14,7 @@
   </div>
   <div class="row">
     <div class="col-md-5">
+      <h2 class="heading left" ng-show="!loadingComments">Comments</h2>
       <div class="loading-comments" ng-show="loadingComments">
         Loading comments from <a ng-href="http://www.reddit.com{{op.permalink}}">reddit</a>...
       </div>
@@ -21,7 +22,8 @@
         <comment comment="comment"></comment>
       </div>
     </div>
-    <div class="col-md-7">
+    <div class="col-md-7 side-content">
+      <h2 class="heading right">Preview</h2>
       <ng:switch on="op.isSelfPost">
         <div class="self-text" ng:switch-when="true">
           <div snuownd="op.selfText"></div>
@@ -30,6 +32,7 @@
           <asc-previewer src="op.url"></asc-previewer>
         </div>
       </ng:switch>
+      <h2 class="heading right">Subreddit Sidebar</h2>
       <div class="subreddit-info">
         <asc-previewer src="subredditUrl"></asc-previewer>
       </div>
