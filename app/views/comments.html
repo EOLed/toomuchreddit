@@ -12,6 +12,17 @@
       </div>
     </div>
   </div>
+  <div class="row" style="display: none">
+    <div class="col-md-12">
+      <div class="post-meta-data">
+        <span class="branding"><a href="/#">Too Much Reddit</a></span>
+        <span class="subreddit"><a ng-href="/#/r/{{op.subreddit}}">{{op.subreddit}}</a></span>
+        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://toomuchreddit.com/#{{op.permalink}}" data-lang="en">Tweet</a>
+        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+        <div class="fb-like" data-href="http://toomuchreddit.com/#{{op.permalink}}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
+      </div>
+    </div>
+  </div>
   <div class="row">
     <div class="col-md-5">
       <h2 class="heading left" ng-show="!loadingComments">Comments</h2>
