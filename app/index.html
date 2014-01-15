@@ -11,13 +11,15 @@
     <meta name="viewport" content="width=device-width">
     <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
 
+    <!-- build:css({.tmp,app}) styles/vendors.css -->
+    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
+    <!-- endbuild -->
+
     <!-- build:css({.tmp,app}) styles/main.css -->
     <link rel="stylesheet" href="styles/main.css">
     <!-- endbuild -->
 
-    <!-- build:css({.tmp,app}) styles/vendors.css -->
-    <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css">
-    <!-- endbuild -->
+    <link href="http://fonts.googleapis.com/css?family=Roboto:400,900,300,900italic,400italic,300italic" rel="stylesheet" type="text/css">
   </head>
   <body ng-app="tmrApp">
     <!--[if lt IE 7]>
@@ -72,5 +74,13 @@
     <script src="scripts/directives/comment.js"></script>
     <script src="vendors/scripts/services/recursionHelper.js"></script>
     <!-- endbuild -->
+    <div id="fb-root"></div>
+    <script>(function(d, s, id) {
+      var js, fjs = d.getElementsByTagName(s)[0];
+      if (d.getElementById(id)) return;
+      js = d.createElement(s); js.id = id;
+      js.src = "//connect.facebook.net/en_US/all.js#xfbml=1&appId=194685317398106";
+      fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));</script>
   </body>
 </html>

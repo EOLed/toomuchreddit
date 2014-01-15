@@ -2,13 +2,19 @@
 @thin-spacing: 5px;
 @muted-color: #eee;
 @primary-text-color: #424254;
-@highlighted-text-color: #ccc;
+@highlighted-text-color: #0093cc;
 @muted-text-color: #aaa;
 @muted-outline-color: #ccc;
 @detail-font-size: 12px;
 
 body {
   color: @primary-text-color;
+  font-family: 'Roboto', sans-serif;
+  font-weight: 300;
+}
+
+h1, h2, h3, h4, h5, h6 {
+  font-family: 'Roboto', sans-serif;
 }
 
 .edge-padding(@width: 15px) {
@@ -28,7 +34,6 @@ div.post-title {
 
   h1 {
     font-size: 21px;
-    font-weight: normal;
     margin-top: 0;
     margin-bottom: 0;
     padding-top: @normal-spacing;
@@ -47,7 +52,7 @@ div.post-title {
   padding: @normal-spacing 0;
 
   .author {
-    font-weight: bold;
+    font-weight: 400;
   }
 
   .title {
@@ -98,13 +103,13 @@ a, a:hover {
   overflow-x: hidden;
 
   .timestamp {
-    font-weight: normal;
+    font-weight: 300;
     color: @muted-text-color;
     font-size: 12px;
   }
 
   .author {
-    font-weight: bold;
+    font-weight: 400;
 
     a {
       color: @primary-text-color;
@@ -133,10 +138,11 @@ h2.heading {
   .edge-padding;
   padding-top: @normal-spacing;
   padding-bottom: @normal-spacing;
-  color: @highlighted-text-color;
+  color: @muted-outline-color;
   border-top-style: solid;
   border-width: 1px;
   border-color: @muted-color;
+  font-weight: 300;
 }
 
 h2.heading.left {
@@ -146,6 +152,22 @@ h2.heading.left {
 
 h2.heading.right {
   border-right-style: solid;
+}
+
+.post-meta-data {
+  .edge-padding;
+  padding-top: @thin-spacing;
+  padding-bottom: @thin-spacing;
+  background-color: #eee;
+  .branding {
+    text-transform: uppercase;
+  }
+
+  .fb-like {
+    vertical-align: middle;
+    height: 20px;
+    overflow: hidden;
+  }
 }
 
 .reply-border (@color: @muted-color, @padding: 1px) {
