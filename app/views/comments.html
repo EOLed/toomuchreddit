@@ -1,6 +1,6 @@
 <div class="container comment-page">
   <div class="row">
-    <div class="col-md-12">
+    <div class="col-sm-12">
       <div class="post-title">
         <h1>
           <ng:switch on="op.isSelfPost">
@@ -12,39 +12,19 @@
       </div>
     </div>
   </div>
-  <div class="row" style="display: none">
-    <div class="col-md-12">
-      <div class="post-meta-data">
-        <span class="branding"><a href="/#">Too Much Reddit</a></span>
-        <span class="subreddit"><a ng-href="/#/r/{{op.subreddit}}">{{op.subreddit}}</a></span>
-        <a href="https://twitter.com/share" class="twitter-share-button" data-url="http://toomuchreddit.com/#{{op.permalink}}" data-lang="en">Tweet</a>
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-        <div class="fb-like" data-href="http://toomuchreddit.com/#{{op.permalink}}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
-      </div>
+  <div class="row post-meta-data">
+    <div class="col-sm-8">
+      <span class="branding"><a href="/#">Too Much Reddit</a></span> &raquo;
+      <span class="subreddit"><a ng-href="/#/r/{{op.subreddit}}">/r/{{op.subreddit}}</a></span>
+    </div>
+    <div class="col-sm-4 post-sharing">
+      <a class="pull-right" href="https://twitter.com/share" class="twitter-share-button" data-url="http://toomuchreddit.com/#{{op.permalink}}" data-lang="en">Tweet</a>
+      <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
+      <div class="fb-like pull-right" data-href="http://toomuchreddit.com/#{{op.permalink}}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
     </div>
   </div>
   <div class="row">
-    <div class="col-md-12">
-      <div class="post-meta-data">
-        <span class="branding"><a href="/#">Too Much Reddit</a></span> &raquo;
-        <span class="subreddit"><a ng-href="/#/r/{{op.subreddit}}">/r/{{op.subreddit}}</a></span>
-        <a class="pull-right" href="https://twitter.com/share" class="twitter-share-button" data-url="http://toomuchreddit.com/#{{op.permalink}}" data-lang="en">Tweet</a>
-        <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0];if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src="https://platform.twitter.com/widgets.js";fjs.parentNode.insertBefore(js,fjs);}}(document,"script","twitter-wjs");</script>
-        <div class="fb-like pull-right" data-href="http://toomuchreddit.com/#{{op.permalink}}" data-layout="button_count" data-action="like" data-show-faces="true" data-share="true"></div>
-      </div>
-    </div>
-  </div>
-  <div class="row">
-    <div class="col-md-5">
-      <h2 class="heading left" ng-show="!loadingComments">Comments</h2>
-      <div class="loading-comments" ng-show="loadingComments">
-        Loading comments from <a ng-href="http://www.reddit.com{{op.permalink}}">reddit</a>...
-      </div>
-      <div class="comments" ng-show="!loadingComments" ng-repeat="comment in comments">
-        <comment comment="comment"></comment>
-      </div>
-    </div>
-    <div class="col-md-7 side-content">
+    <div class="col-sm-7 col-sm-push-5 side-content">
       <h2 class="heading right">Preview</h2>
       <ng:switch on="op.isSelfPost">
         <div class="self-text" ng:switch-when="true">
@@ -54,9 +34,18 @@
           <asc-previewer src="op.url"></asc-previewer>
         </div>
       </ng:switch>
-      <h2 class="heading right">Subreddit Sidebar</h2>
-      <div class="subreddit-info">
+      <h2 class="hidden-xs heading right">Subreddit Sidebar</h2>
+      <div class="hidden-xs subreddit-info">
         <asc-previewer src="subredditUrl"></asc-previewer>
+      </div>
+    </div>
+    <div class="col-sm-5 col-sm-pull-7">
+      <h2 class="heading left" ng-show="!loadingComments">Comments</h2>
+      <div class="loading-comments" ng-show="loadingComments">
+        Loading comments from <a ng-href="http://www.reddit.com{{op.permalink}}">reddit</a>...
+      </div>
+      <div class="comments" ng-show="!loadingComments" ng-repeat="comment in comments">
+        <comment comment="comment"></comment>
       </div>
     </div>
   </div>
