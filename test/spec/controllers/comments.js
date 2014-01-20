@@ -76,7 +76,8 @@ describe('Controller: CommentsCtrl', function () {
     }
   }];
 
-  beforeEach(inject(function ($rootScope, _$routeParams_, _$httpBackend_, _localStorageService_, _$interval_) {
+  beforeEach(inject(function ($rootScope, _$routeParams_, _$httpBackend_, _localStorageService_,
+                              _$interval_) {
     scope = $rootScope.$new();
     $httpBackend = _$httpBackend_;
     $routeParams = _$routeParams_;
@@ -183,7 +184,9 @@ describe('Controller: CommentsCtrl', function () {
   });
 
   describe('OP found in cache', function () {
-    beforeEach(inject(function ($controller) {
+    var Page;
+    beforeEach(inject(function ($controller, _Page_) {
+      Page = _Page_;
       $httpBackend
         .expectJSONP('http://www.reddit.com/r/nba/comments/1t/kobe_out.json?sort=new&jsonp=JSON_CALLBACK')
         .respond(200, commentListing);
@@ -218,11 +221,17 @@ describe('Controller: CommentsCtrl', function () {
     it('fetches comments from reddit and sends it back to server', function () {
     });
 
+    it('updates title to include OP title', function () {
+      expect(Page.getTitle()).toContain('test title');
+    });
+
     expectPostRetrieved();
   });
 
   describe('OP not found in cache', function () {
-    beforeEach(inject(function ($controller) {
+    var Page;
+    beforeEach(inject(function ($controller, _Page_) {
+      Page = _Page_;
       $httpBackend
         .expectJSONP('http://www.reddit.com/r/nba/comments/1t/kobe_out.json?sort=new&jsonp=JSON_CALLBACK')
         .respond(200, commentListing);
@@ -232,6 +241,10 @@ describe('Controller: CommentsCtrl', function () {
       loadController($controller);
       $httpBackend.flush();
     }));
+
+    it('updates title to include OP title', function () {
+      expect(Page.getTitle()).toContain('test title');
+    });
 
     expectPostRetrieved();
   });

@@ -2,7 +2,7 @@
 'use strict';
 
 angular.module('tmrApp').controller('ListingCtrl',
-    function ($scope, $http, localStorageService, $routeParams) {
+    function ($scope, $http, localStorageService, $routeParams, Page) {
   function getListingFromResponse(data) {
     var listing = [],
         apiListing = data.data.children;
@@ -36,13 +36,23 @@ angular.module('tmrApp').controller('ListingCtrl',
 
   function fetchListing(subreddit) {
     var subredditUrl = '';
-    if (angular.isDefined(subreddit)) {
+    if (!isFrontPageListing()) {
       subredditUrl = 'r/' + subreddit;
     }
 
     return $http.jsonp('http://www.reddit.com/' + subredditUrl + '.json?jsonp=JSON_CALLBACK');
   }
 
+  function isFrontPageListing() {
+    return angular.isUndefined($routeParams.subreddit);
+  }
+
+  function updateTitle() {
+    var title = isFrontPageListing() ? 'real-time reddit comments' : '/r/' + $routeParams.subreddit;
+    Page.setTitle(title);
+  }
+
+  updateTitle();
   fetchListing($routeParams.subreddit).success(function (data) {
     var listing = getListingFromResponse(data);
     $scope.listing = listing;

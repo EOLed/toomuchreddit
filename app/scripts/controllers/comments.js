@@ -3,7 +3,7 @@
 
 angular.module('tmrApp')
   .controller('CommentsCtrl',
-    function ($scope, $routeParams, $http, localStorageService, $interval) {
+    function ($scope, $routeParams, $http, localStorageService, $interval, Page) {
       function getCommentsApiPermalink() {
         return 'http://www.reddit.com/' + getCommentsPermalink() + '.json?sort=new&jsonp=JSON_CALLBACK';
       }
@@ -117,6 +117,7 @@ angular.module('tmrApp')
           return;
         }
 
+        Page.setTitle(op.title);
         $scope.subredditUrl = 'http://www.reddit.com/r/' + op.subreddit;
       }
 

@@ -6,7 +6,7 @@ describe('Controller: ListingCtrl', function () {
   // load the controller's module
   beforeEach(module('tmrApp'));
 
-  var ListingCtrl, scope, $httpBackend, localStorageService, $routeParams;
+  var ListingCtrl, scope, $httpBackend, localStorageService, $routeParams, Page;
   var frontPageListing = {
     data: {
       children: [
@@ -73,7 +73,8 @@ describe('Controller: ListingCtrl', function () {
 
   // Initialize the controller and a mock scope
   beforeEach(inject(function ($controller, $rootScope, _$httpBackend_, _localStorageService_,
-      _$routeParams_) {
+      _$routeParams_, _Page_) {
+    Page = _Page_;
     scope = $rootScope.$new();
     $routeParams = _$routeParams_;
     localStorageService = _localStorageService_;
@@ -94,6 +95,10 @@ describe('Controller: ListingCtrl', function () {
       $httpBackend.flush();
     }));
 
+    it('sets a subreddit-specific title', function () {
+      expect(Page.getTitle()).toEqual('/r/nba');
+    });
+
     verifyExpectedBehavior();
   });
 
@@ -108,6 +113,10 @@ describe('Controller: ListingCtrl', function () {
       });
       $httpBackend.flush();
     }));
+
+    it('sets title to "real-time reddit comments"', function () {
+      expect(Page.getTitle()).toEqual('real-time reddit comments');
+    });
 
     verifyExpectedBehavior();
   });
