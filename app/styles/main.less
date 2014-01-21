@@ -10,7 +10,7 @@
 body {
   color: @primary-text-color;
   font-family: 'Roboto', sans-serif;
-  font-weight: 300;
+  .normal-font();
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -38,6 +38,7 @@ div.post-title {
     margin-bottom: 0;
     padding-top: @normal-spacing;
     padding-bottom: @normal-spacing;
+    .normal-font();
   }
 
   a, a:hover {
@@ -52,7 +53,7 @@ div.post-title {
   padding: @normal-spacing 0;
 
   .author {
-    font-weight: 400;
+    .bold-font();
   }
 
   .title {
@@ -93,6 +94,14 @@ a, a:hover {
   border-right-color: @color;
 }
 
+.bold-font() {
+  font-weight: 400;
+}
+
+.normal-font() {
+  font-weight: 300;
+}
+
 .comment {
   .thin-right-border(@muted-color);
   .thin-top-border(@muted-color);
@@ -103,7 +112,7 @@ a, a:hover {
   overflow-x: hidden;
 
   .timestamp {
-    font-weight: 300;
+    .normal-font();
     color: @muted-text-color;
     font-size: 12px;
   }
@@ -142,7 +151,7 @@ h2.heading {
   border-top-style: solid;
   border-width: 1px;
   border-color: @muted-color;
-  font-weight: 300;
+  .normal-font();
 }
 
 h2.heading.left {
@@ -252,4 +261,9 @@ h2.heading.right {
   h5 {
     font-size: @detail-font-size + 2;
   }
+}
+
+.listing .subreddit a, .listing .author a {
+  color: #222;
+  .bold-font();
 }
