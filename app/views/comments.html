@@ -45,10 +45,10 @@
           ng-class="{'btn-success': autoRefresh, 'btn-danger': !autoRefresh}"
                 ng-click="toggleAutoRefresh()">
           <span ng-show="autoRefresh">
-            <span class="glyphicon glyphicon-refresh"></span> CONNECTED
+            <span class="glyphicon glyphicon-refresh" style="display: none"></span> CONNECTED
           </span>
           <span ng-show="!autoRefresh">
-            <span class="glyphicon glyphicon-minus-sign"></span> DISCONNECTED
+            <span class="glyphicon glyphicon-minus-sign" style="display: none"></span> DISCONNECTED
           </span>
         </button>
       </h2>
