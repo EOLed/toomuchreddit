@@ -40,7 +40,18 @@
       </div>
     </div>
     <div class="col-sm-5 col-sm-pull-7">
-      <h2 class="heading left" ng-show="!loadingComments">Comments</h2>
+      <h2 class="heading comments left" ng-show="!loadingComments">Comments
+        <button class="pull-right btn btn-xs auto-refresh"
+          ng-class="{'btn-success': autoRefresh, 'btn-danger': !autoRefresh}"
+                ng-click="toggleAutoRefresh()">
+          <span ng-show="autoRefresh">
+            <span class="glyphicon glyphicon-refresh"></span> CONNECTED
+          </span>
+          <span ng-show="!autoRefresh">
+            <span class="glyphicon glyphicon-minus-sign"></span> DISCONNECTED
+          </span>
+        </button>
+      </h2>
       <div class="loading-comments" ng-show="loadingComments">
         Loading comments from <a ng-href="http://www.reddit.com{{op.permalink}}">reddit</a>...
       </div>

@@ -4,6 +4,42 @@
 angular.module('tmrApp')
   .controller('CommentsCtrl',
     function ($scope, $routeParams, $http, localStorageService, $interval, Page) {
+      function createCommentsAutoRefreshTimer() {
+        return $interval(loadLatestComments, 20000, 0, false);
+      }
+
+      function cancelCommentsAutoRefreshTimer() {
+        $interval.cancel(loadLatestCommentsTimer);
+      }
+
+      function loadLatestComments() {
+        $http.jsonp(getCommentsApiPermalink()).success(function (data) {
+          if (isOpNotFoundInCache()) {
+            setOriginalPost(getOriginalPostFromResponse(data));
+          }
+
+          indicateCommentsLoaded();
+          $scope.comments = getCommentsFromResponse(data);
+          sendToServer(data);
+        }).error(function () {
+          indicateCommentsLoaded();
+          console.log('could not send comments to toomuchreddit.com');
+        });
+      }
+
+      var loadLatestCommentsTimer = createCommentsAutoRefreshTimer();
+
+      function toggleAutoRefresh() {
+        $scope.autoRefresh = !$scope.autoRefresh;
+
+        if ($scope.autoRefresh) {
+          loadLatestComments();
+          loadLatestCommentsTimer = createCommentsAutoRefreshTimer();
+        } else {
+          cancelCommentsAutoRefreshTimer();
+        }
+      }
+      
       function getCommentsApiPermalink() {
         return 'http://www.reddit.com/' + getCommentsPermalink() + '.json?sort=new&jsonp=JSON_CALLBACK';
       }
@@ -95,21 +131,6 @@ angular.module('tmrApp')
         return comments;
       }
 
-      function loadLatestComments() {
-        $http.jsonp(getCommentsApiPermalink()).success(function (data) {
-          if (isOpNotFoundInCache()) {
-            setOriginalPost(getOriginalPostFromResponse(data));
-          }
-
-          indicateCommentsLoaded();
-          $scope.comments = getCommentsFromResponse(data);
-          sendToServer(data);
-        }).error(function () {
-          indicateCommentsLoaded();
-          console.log('could not send comments to toomuchreddit.com');
-        });
-      }
-
       function setOriginalPost(op) {
         $scope.op = op;
 
@@ -121,12 +142,14 @@ angular.module('tmrApp')
         $scope.subredditUrl = 'http://www.reddit.com/r/' + op.subreddit;
       }
 
+      $scope.autoRefresh = true;
+      $scope.toggleAutoRefresh = toggleAutoRefresh;
+
       indicateCommentsLoading();
       setOriginalPost(getOriginalPostFromCache($routeParams.id));
       loadLatestComments();
-      var loadLatestCommentsTimer = $interval(loadLatestComments, 20000, 0, false);
       $scope.$on('$destroy', function () {
-        $interval.cancel(loadLatestCommentsTimer);
+        cancelCommentsAutoRefreshTimer();
       });
     }
 );

@@ -175,6 +175,37 @@ describe('Controller: CommentsCtrl', function () {
         $httpBackend.flush();
       });
 
+      it('does not retrieve new comments when toggled off', function () {
+        scope.toggleAutoRefresh();
+
+        $interval.flush(20000);
+
+        $httpBackend.verifyNoOutstandingRequest();
+      });
+
+      it('retrieves new comments immediately after toggled back on and then every 20 secs', function () {
+        scope.toggleAutoRefresh();
+        scope.toggleAutoRefresh();
+
+        $httpBackend
+          .expectJSONP('http://www.reddit.com/r/nba/comments/1t/kobe_out.json?sort=new&jsonp=JSON_CALLBACK')
+          .respond(200, commentListing);
+        $httpBackend.expectPOST('/comments', commentListing).respond(200, { });
+
+        $interval.flush(10);
+
+        $httpBackend.flush();
+
+        $httpBackend
+          .expectJSONP('http://www.reddit.com/r/nba/comments/1t/kobe_out.json?sort=new&jsonp=JSON_CALLBACK')
+          .respond(200, commentListing);
+        $httpBackend.expectPOST('/comments', commentListing).respond(200, { });
+
+        $interval.flush(20000);
+
+        $httpBackend.flush();
+      });
+
       it('cancels timer when controller is destroyed', function () {
         scope.$destroy();
         $interval.flush(20000);
@@ -247,6 +278,27 @@ describe('Controller: CommentsCtrl', function () {
     });
 
     expectPostRetrieved();
+  });
+
+  describe('toggleAutoRefresh()', function () {
+    beforeEach(inject(function ($controller) {
+      loadController($controller);
+    }));
+
+    it('autoRefresh defaults to true', function () {
+      expect(scope.autoRefresh).toBeTruthy();
+    });
+
+    it('becomes false when toggling', function () {
+      scope.toggleAutoRefresh();
+      expect(scope.autoRefresh).toBeFalsy();
+    });
+
+    it('becomes true when toggling again', function () {
+      scope.toggleAutoRefresh();
+      scope.toggleAutoRefresh();
+      expect(scope.autoRefresh).toBeTruthy();
+    });
   });
 
   function expectPostRetrieved() {
