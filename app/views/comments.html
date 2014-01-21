@@ -45,7 +45,7 @@
         Loading comments from <a ng-href="http://www.reddit.com{{op.permalink}}">reddit</a>...
       </div>
       <div class="comments" ng-show="!loadingComments" ng-repeat="comment in comments">
-        <comment comment="comment"></comment>
+        <comment comment="comment" op="op.author"></comment>
       </div>
     </div>
   </div>

@@ -5,7 +5,8 @@ angular.module('tmrApp').directive('comment', function (recursionHelper) {
     templateUrl: 'views/directives/comment.html',
     restrict: 'E',
     scope: {
-      'comment': '='
+      'comment': '=',
+      'op': '='
     },
     compile: function (element) {
       return recursionHelper.compile(element);

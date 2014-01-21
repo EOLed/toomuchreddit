@@ -118,7 +118,7 @@ a, a:hover {
   }
 
   .author {
-    font-weight: 400;
+    .bold-font();
 
     a {
       color: @primary-text-color;
@@ -126,6 +126,10 @@ a, a:hover {
 
     a:hover {
       color: @highlighted-text-color;
+    }
+
+    a.op {
+      color: #ef0b07;
     }
 
     .flair-text {
