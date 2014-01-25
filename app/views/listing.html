@@ -1,7 +1,7 @@
 <div class="container listing">
   <div class="post" ng-repeat="post in listing">
-    <div class="subreddit"><a ng-href="#/r/{{post.subreddit}}">{{post.subreddit}}</a></div>
-    <a class="post-title" ng-href="#{{post.permalink}}" ng-bind-html="post.title"></a>
+    <div class="subreddit"><a ng-href="/r/{{post.subreddit}}">{{post.subreddit}}</a></div>
+    <a class="post-title" ng-href="{{post.permalink}}" ng-bind-html="post.title"></a>
     <span class="domain">({{post.domain}})</span>
   </div>
 </div>

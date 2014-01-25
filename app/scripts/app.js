@@ -4,7 +4,7 @@ angular.module('LocalStorageModule').value('prefix', 'tmr');
 angular.module('tmrApp',
       ['ngCookies','ngResource', 'ngSanitize', 'ngRoute', 'LocalStorageModule', 'achan.snuownd',
           'angularMoment', 'achan.previewer'])
-  .config(function ($routeProvider, localStorageServiceProvider) {
+  .config(function ($routeProvider, localStorageServiceProvider, $locationProvider) {
     $routeProvider.when('/r/:subreddit/comments/:id/:slug', {
       templateUrl: 'views/comments.html',
       controller: 'CommentsCtrl'
@@ -17,6 +17,8 @@ angular.module('tmrApp',
     }).otherwise({
       redirectTo: '/'
     });
+
+    $locationProvider.html5Mode(true).hashPrefix('!');
 
     localStorageServiceProvider.prefix = 'tmr';
   }).run(function ($window) {
