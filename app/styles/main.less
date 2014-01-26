@@ -102,6 +102,11 @@ a, a:hover {
   font-weight: 300;
 }
 
+.text-overflow() {
+  text-overflow: ellipsis;
+  overflow: hidden;
+}
+
 .comment {
   .thin-right-border(@muted-color);
   .thin-top-border(@muted-color);
@@ -109,7 +114,10 @@ a, a:hover {
   .edge-padding;
   padding-top: @normal-spacing;
   padding-bottom: @normal-spacing;
-  overflow-x: hidden;
+
+  p {
+    .text-overflow();
+  }
 
   .timestamp {
     .normal-font();
@@ -234,6 +242,11 @@ h2.heading.right {
   border-right-style: solid;
   border-width: 1px;
   border-color: @muted-color;
+  .text-overflow();
+
+  p {
+    .text-overflow();
+  }
 }
 
 .preview img {
