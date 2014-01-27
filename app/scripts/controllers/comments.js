@@ -2,7 +2,8 @@
 'use strict';
 
 angular.module('tmrApp').controller('CommentsCtrl',
-  function ($scope, $routeParams, $http, localStorageService, $interval, Page) {
+  function ($scope, $routeParams, $http, localStorageService, $interval, Page,
+            redditResponseService) {
     function createAutoRefreshCommentsTimer() {
       return $interval(loadLatestComments, 20000, 0, false);
     }
@@ -22,7 +23,7 @@ angular.module('tmrApp').controller('CommentsCtrl',
 
     function onLatestCommentsLoaded(response) {
       if (isOpNotFoundInCache()) {
-        setOriginalPost(getOriginalPostFromResponse(response));
+        setOriginalPost(redditResponseService.getOriginalPost(response));
       }
 
       indicateCommentsLoaded();
@@ -75,19 +76,6 @@ angular.module('tmrApp').controller('CommentsCtrl',
       });
 
       return op;
-    }
-
-    function getOriginalPostFromResponse(data) {
-      var op = data[0].data.children[0].data;
-      return {
-        title: op.title,
-        subreddit: op.subreddit,
-        domain: op.domain,
-        url: op.url,
-        isSelfPost: op.is_self,
-        authorFlairText: op.author_flair_text,
-        selfText: op.selftext
-      };
     }
 
     function isOpNotFoundInCache() {
