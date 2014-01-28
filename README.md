@@ -14,5 +14,5 @@ You can browse the application by replacing reddit.com with
 toomuchreddit.com/#/ for the following listings:
 
  - The frontpage (ie. http://toomuchreddit.com)
- - Subreddits (ie. http://toomuchreddit.com/#/r/nba)
- - Comments (ie. http://toomuchreddit.com/#/r/IAmA/comments/1vhjag/bill_murray_here_ok_ill_talk_ill_talk)
+ - Subreddits (ie. http://toomuchreddit.com/r/nba)
+ - Comments (ie. http://toomuchreddit.com/r/IAmA/comments/1vhjag/bill_murray_here_ok_ill_talk_ill_talk)
