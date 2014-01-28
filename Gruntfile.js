@@ -6,6 +6,7 @@
 // 'test/spec/{,*/}*.js'
 // use this if you want to recursively match all subfolders:
 // 'test/spec/**/*.js'
+var modRewrite = require('connect-modrewrite');
 
 module.exports = function (grunt) {
 
@@ -60,10 +61,23 @@ module.exports = function (grunt) {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
         hostname: '0.0.0.0',
-        livereload: 35729
+        livereload: 35729,
+        base: [
+          '<%= yeoman.app %>'
+        ]
       },
       livereload: {
         options: {
+          middleware: function (connect, options) {
+            var middlewares = [
+              modRewrite(['^/r/(.*)$ /index.html [L]'])
+            ];
+            options.base.forEach(function (base) {
+              middlewares.push(connect.static(base));
+            });
+
+            return middlewares;
+          },
           open: true,
           base: [
             '.tmp',
