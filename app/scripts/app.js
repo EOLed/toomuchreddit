@@ -3,12 +3,22 @@
 angular.module('LocalStorageModule').value('prefix', 'tmr');
 angular.module('tmrApp',
       ['ngCookies','ngResource', 'ngSanitize', 'ngRoute', 'LocalStorageModule', 'achan.snuownd',
-          'angularMoment', 'achan.previewer'])
+       'angularMoment', 'achan.previewer'])
   .config(function ($routeProvider, localStorageServiceProvider, $locationProvider) {
     $routeProvider.when('/r/:subreddit/comments/:id/:slug', {
       templateUrl: 'views/comments.html',
       controller: 'CommentsCtrl'
     }).when('/', {
+      templateUrl: 'views/index.html',
+      controller: 'PageCtrl',
+      resolve: {
+        pageInfo: function () {
+          return {
+            title: 'This is the title'
+          };
+        }
+      }
+    }).when('/r/all', {
       templateUrl: 'views/listing.html',
       controller: 'ListingCtrl'
     }).when('/r/:subreddit', {
